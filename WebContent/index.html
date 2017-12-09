@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+    <script src="highcharts-ng.js"></script>
+    
+    <script src="app.js"></script>
+
+</head>
+
+<body ng-app="BMTCApp" ng-controller="bmtcController as cntrl">
+    <!--<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">               
+                <p class="navbar-brand" >BMTC</p>
+            </div>
+        </div>
+    </nav>-->
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>BMTC</h1>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for..." ng-model="cntrl.routeName">
+                    <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" ng-click="cntrl.findBusStops()">Go!</button>
+      </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="form-group">
+                <label class="col-lg-4" for="company">Please select busstop :</label>
+
+                <div class="col-lg-8">
+                    <select id="company" class="form-control" ng-model="busStop.busStopName" ng-options="busStop.busStopName for busStop in cntrl.busStops" ng-change="cntrl.selectBusStop(busStop)">
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+  <form name="myForm">
+       <div class="row">
+            <input type="radio" ng-model="cntrl.selectedOption" value="source" ng-change="cntrl.selectDirection()"> {{cntrl.sourceStopName}} to {{cntrl.destinationStopName}}<br/>
+       </div>
+        <div class="row">
+              <input type="radio" ng-model="cntrl.selectedOption" value="destination" ng-change="cntrl.selectDirection()">{{cntrl.destinationStopName}} to {{cntrl.sourceStopName}}<br/>
+        </div>
+
+               <div class="input-group">
+                   <label class="col-lg-4" for="company">Date :</label>
+                    <input type="text" class="form-control col-lg-6" placeholder="Date..." ng-model="cntrl.date">
+                </div>
+                
+                <div class="input-group">
+                   <label class="col-lg-4" for="company">Start Time:</label>
+                    <input type="text" class="form-control" class="col-lg-6" placeholder="Date..." ng-model="cntrl.startTime">
+                     <label class="col-lg-4" for="company">End Time :</label>
+                    <input type="text" class="form-control col-lg-6" placeholder="Date..." ng-model="cntrl.endTime">
+                </div>
+
+   </form>
+   <div class="row">
+       <button type="button" class="btn btn-primary col-lg-4" ng-click="cntrl.bunchingForSelectedBusStop()">Check Bunching for selected bus Stop</button>
+       <button type="button" class="btn btn-primary col-lg-6" ng-click="cntrl.bunchingForSelectedBusStopOneWeek()">Check Bunching for selected bus Stop(one week)</button>
+      </div>
+      <div class="row">
+       <button type="button" class="btn btn-primary col-lg-4" ng-click="cntrl.bunchingForRoute()">Check Bunching for all bus Stop</button>
+       <button type="button" class="btn btn-primary col-lg-6" ng-click="cntrl.bunchingForAllRoute()">Check Bunching for one week(all bus Stop at given time frame)</button>
+   </div>
+    </div>
+
+
+
+
+		<div id="container" ng-style="cntrl.myStyle"></div>
+		<hr />
+
+
+
+
+
+
+</body>
+
+</html>
